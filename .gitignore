@@ -2,3 +2,6 @@
 .vscode
 *.pyc
 __pycache__/
+*.pth
+*.tar.xz
+train/dataset
