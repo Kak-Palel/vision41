@@ -10,8 +10,8 @@ class CardIsolator:
         # self.upper_hsv_bound = np.array([90, 165, 199])
         self.min_card_area = min_card_area
         
-        self.lower_hsv_bound = np.array([38, 74, 125])
-        self.upper_hsv_bound = np.array([46, 171, 190])
+        self.lower_hsv_bound = np.array([36, 84, 59])
+        self.upper_hsv_bound = np.array([46, 255, 197])
 
     def calibrate_background_color(self, image):
         cv.namedWindow("Calibrate Background Color")
