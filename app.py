@@ -27,25 +27,22 @@ def main():
 
         detection = frame.copy()
 
-        card_dictionaries = []
-
         isolated_cards, isolated_cards_frame, contours = isolator.isolate_cards(frame)
         no_bg = np.zeros_like(frame)
         for i, isolated_card in enumerate(isolated_cards):
             x, y, w, h = cv.boundingRect(contours[i])
             no_bg = no_bg + isolated_card
             # cv.drawContours(frame, [contours[i]], -1, 255, thickness=cv.FILLED)
-            cv.rectangle(detection, (x, y), (x + w, y + h), (100*i, 50*i, 90*i), 2)
+            # cv.rectangle(detection, (x, y), (x + w, y + h), (100*i, 50*i, 90*i), 2)
             
-            extracted_card = isolator.extract_card(isolated_card)
-            if extracted_card is not None:
-                label = classifier.classify_card(extracted_card)
-                card = {'x': x, 'y': y, 'w': w, 'h': h, 'label': label}
-                card_dictionaries.append(card)
-                cv.putText(detection, label, (x, y - 10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (100*i, 50*i, 90*i), 2)
+        #     extracted_card = isolator.extract_card(isolated_card)
+        #     if extracted_card is not None:
+        #         label = classifier.classify_card(extracted_card)
+        #         card = {'x': x, 'y': y, 'w': w, 'h': h, 'label': label}
+        #         cv.putText(detection, label, (x, y - 10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (100*i, 50*i, 90*i), 2)
 
-        game.update_cards(card_dictionaries)
-        game.update_clusters(no_bg)
+        game.update_cluster_poses(no_bg)
+        game.update_cluster_data(isolated_cards, isolator, classifier)
         game_frame = game.draw_game(frame, debug=True)
 
         cv.imshow("Game Frame", game_frame)
@@ -53,7 +50,7 @@ def main():
         # exit()
 
         # cv.imshow("Isolated Cards", isolated_cards_frame)
-        cv.imshow("No Background", no_bg)
+        # cv.imshow("No Background", no_bg)
         # cv.imshow("Game", frame)
         # cv.imshow("detection", detection)
 

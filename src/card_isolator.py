@@ -2,16 +2,20 @@ import cv2 as cv
 import numpy as np
 
 class CardIsolator:
-    def __init__(self, min_card_area=17500):
+    def __init__(self, min_card_area=15000):
+        # for min_card_area, the 2:3 factor of it is 3125 x 4800
         # self.upper_hsv_bound = np.array([255,255,255])
         # self.lower_hsv_bound = np.array([0,0,0])
 
-        # self.lower_hsv_bound = np.array([33, 69, 140])
-        # self.upper_hsv_bound = np.array([90, 165, 199])
+        # self.lower_hsv_bound = np.array([37, 96, 130])
+        # self.upper_hsv_bound = np.array([52, 194, 190])
+        self.lower_hsv_bound = np.array([80, 50, 107])
+        self.upper_hsv_bound = np.array([89, 255, 199])
+
         self.min_card_area = min_card_area
         
-        self.lower_hsv_bound = np.array([36, 84, 59])
-        self.upper_hsv_bound = np.array([46, 255, 197])
+        # self.lower_hsv_bound = np.array([0, 67, 50])
+        # self.upper_hsv_bound = np.array([70, 179, 195])
 
     def calibrate_background_color(self, image):
         cv.namedWindow("Calibrate Background Color")
