@@ -9,8 +9,8 @@ class CardIsolator:
 
         # self.lower_hsv_bound = np.array([37, 96, 130])
         # self.upper_hsv_bound = np.array([52, 194, 190])
-        self.lower_hsv_bound = np.array([80, 50, 107])
-        self.upper_hsv_bound = np.array([89, 255, 199])
+        self.lower_hsv_bound = np.array([36, 80, 127])
+        self.upper_hsv_bound = np.array([49, 182, 212])
 
         self.min_card_area = min_card_area
         
